@@ -1,12 +1,12 @@
-const calucations = document.getElementById("calucations");
-const number = document.getElementById("number");
+const calucations = document.getElementById("calucations"); // calculations happen in a specific paragraph
+const number = document.getElementById("number");// current typing number shows on a specific paragraph
 
-let i = 0;
-let element = 0;
-let funcs = 0;
+let i = 0;// current typing digit 
+let element = 0; //current typing number, goes to next when you use + - * /
+let funcs = 0; //amount of function used, saving for further call on last calculatons
 
-function addDigit(digit) {
-    if (numbers[element] === undefined) {
+function addDigit(digit) { //adding the selceted digit to the number
+    if (numbers[element] === undefined) {//making sure if the element is defined in the array
         numbers[element] = 0;
     }
     numbers[element] *= 10 ;
@@ -15,10 +15,10 @@ function addDigit(digit) {
     number.innerHTML = numbers[element];
 }
 
-let numbers = [];
-let functions = [];
+let numbers = []; //numbers calculating
+let functions = []; // all the (+-*/)  in selceted order
 
-const button1 = document.getElementById("num1"); 
+const button1 = document.getElementById("num1"); // calling buttons starts
 const button2 = document.getElementById("num2");
 const button3 = document.getElementById("num3");
 const button4 = document.getElementById("num4");
@@ -34,9 +34,9 @@ const minus = document.getElementById("minus");
 const multiply = document.getElementById("multiply");
 const divison = document.getElementById("divison");
 const equalto = document.getElementById("equal");
-const reset = document.getElementById("reset");
+const reset = document.getElementById("reset"); // calling buttons finishs
 
-button1.addEventListener("click" , no1Function );
+button1.addEventListener("click" , no1Function );//deploying functions on buttons starts
 button2.addEventListener("click" , no2Function );
 button3.addEventListener("click" , no3Function );
 button4.addEventListener("click" , no4Function );
@@ -52,8 +52,9 @@ minus.addEventListener("click" , minusFunction);
 divison.addEventListener("click" , divideFunction);
 multiply.addEventListener("click" , multiplyFunction);
 equalto.addEventListener("click" , equalToFunction);
-reset.addEventListener("click" , resertFunction);
+reset.addEventListener("click" , resertFunction); //deploying functions on buttons ends
 
+//adding the selected digit by the user to current number
 function no1Function () {
     const digit = 1;
     addDigit(digit);
@@ -95,9 +96,10 @@ function no0Function () {
     addDigit(digit);
 }
 
-
+//using each sum,minus,multiply,division functions closes the current number
+//starts the next number counting it digits
 function sumFunction () {
-    if (functions[funcs] === undefined) {
+    if (functions[funcs] === undefined) {//making sure if the element is defined in array
         functions[funcs] = '+';
     }
     calucations.innerHTML = ` `
@@ -107,14 +109,14 @@ function sumFunction () {
             calucations.innerHTML += functions[x];
         }
         }
-    element++;
+    element++;//moving to the next number
     funcs++;
     i = 0;
     return;
 }
 
 
-function minusFunction () {
+function minusFunction () {//making sure if the element is defined in array
     if (functions[funcs] === undefined) {
         functions[funcs] = '-';
     }
@@ -125,14 +127,14 @@ function minusFunction () {
             calucations.innerHTML += functions[x];
         }
     }
-    element++;
+    element++;//moving to the next number
     funcs++;
     i = 0;
     return;
 }
 
 
-function divideFunction () {
+function divideFunction () {//making sure if the element is defined in array
     if (functions[funcs] === undefined) {
         functions[funcs] = '/';
     }
@@ -143,7 +145,7 @@ function divideFunction () {
             calucations.innerHTML += functions[x];
         }
     }
-    element++;
+    element++;//moving to the next number
     funcs++;
     i = 0;
     return;
@@ -151,7 +153,7 @@ function divideFunction () {
 }
 
 
-function multiplyFunction () {
+function multiplyFunction () {//making sure if the element is defined in array
     if (functions[funcs] === undefined) {
         functions[funcs] = '*';
     }
@@ -162,20 +164,22 @@ function multiplyFunction () {
             calucations.innerHTML += functions[x];
         }
     }
-    element++;
+    element++; //moving to the next number
     funcs++;
     i = 0;
     return;
 }
 
+//clearing the calculations paragraph and recalling numbers and functions in order
+//calculating by the function char selected by user
 function equalToFunction (){
     let answer = numbers[0];
 
     calucations.innerHTML = ` `
     for(let x = 0 ; x <= element ; x++){
-        calucations.innerHTML += numbers[x]
+        calucations.innerHTML += numbers[x] // calling numbers
         if (functions[x] !== undefined){
-            calucations.innerHTML += functions[x];
+            calucations.innerHTML += functions[x]; //calling functions
             if(functions[x] == '+'){
                 answer += numbers[x + 1];
             }
@@ -190,11 +194,11 @@ function equalToFunction (){
             }
         }
     }
-    calucations.innerHTML += ` = ${answer} `;
+    calucations.innerHTML += ` = ${answer} `; // showing the final result
 
 }
 
-function resertFunction () {
+function resertFunction () { //clearing all the arrays and paragraphs for any selction error
     i = 0;
     element = 0;
     funcs = 0;
